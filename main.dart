@@ -1,63 +1,82 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.yellow,
-      ),
-      home: const MyHomePage(title: 'ali akbar '),
+      title: 'Tugas ali akbar',
+      home: GridViewPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class GridViewPage extends StatelessWidget {
+  final List<String> _numbers = [
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Eleven",
+    "Twelve",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("pertemuan 2"),
+        title: Text(' ALI AKBAR ZULKARNEN_ 201011400585'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(child: const Text("Kelas : 06TPLM006")),
-            Container(
-              child: const Text("Nama : ALI AKBAR ZULKARNAEN"),
+      body: GridView.count(
+        crossAxisCount: 4,
+        childAspectRatio: 1.5,
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 8.0,
+        children: List.generate(12, (index) {
+          Color color;
+          switch (index) {
+            case 8:
+              color = Colors.green[100]!;
+              break;
+            case 9:
+              color = Colors.lightGreen[200]!;
+              break;
+            case 10:
+              color = Colors.lightGreen[300]!;
+              break;
+            case 11:
+              color = Colors.lightGreen[800]!;
+              break;
+            default:
+              color = Color.lerp(
+                Colors.lightBlue[100]!,
+                Colors.green[900]!,
+                index / 11,
+              )!;
+          }
+          return Container(
+            color: color,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  _numbers[index],
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
             ),
-            Container(child: const Text("NIM : 201011400585")),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feed),
-            label: 'Feed',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Setting',
-          ),
-        ],
+          );
+        }),
       ),
     );
   }
